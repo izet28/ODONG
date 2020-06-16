@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import welcome from './welcome.png';
 
-const ActionButton = ({title}) => {
+const ActionButton = ({title, onPress}) => {
   return (
     <TouchableOpacity
       style={{
@@ -12,7 +12,8 @@ const ActionButton = ({title}) => {
         paddingVertical: 13,
         width: 225,
         marginBottom: 35,
-      }}>
+      }}
+      onPress={onPress}>
       <Text
         style={{
           fontSize: 12,
@@ -27,7 +28,10 @@ const ActionButton = ({title}) => {
   );
 };
 
-export default function Welcome(navigation) {
+export default function Welcome({navigation}) {
+  const handleGotTo = (screen) => {
+    navigation.navigate(screen);
+  };
   return (
     <View
       style={{
@@ -53,8 +57,11 @@ export default function Welcome(navigation) {
         }}
       />
       <View>
-        <ActionButton title="Login" />
-        <ActionButton title="Register" />
+        <ActionButton title="Login" onPress={() => handleGotTo('Login')} />
+        <ActionButton
+          title="Register"
+          onPress={() => handleGotTo('Register')}
+        />
       </View>
     </View>
   );
